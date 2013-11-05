@@ -1,0 +1,48 @@
+Using the TinyOS Bluetooth Bee Shield
+--------------------------------------------------
+
+Before you start you need to identify the location of several important parts. Hold the bluetooth Bee shield so that the Bluetooth Bee board is at the top. Arduino pins 0 and 1 will be at the top left. Top right of the board, alongside the Arduino Analog pins is a small silver swith with two positions. UART is the top position and DLine is the bottom position.
+
+On the Bluetooth Bee board is a small black double switch, ensure both the small white switches are on the left hand side (normal running position).
+
+Look carefully alongside the Arduino header pins 0 and 1 theree are two pairs of very small rectangular pads marked 2 and 3.
+
+An android phone works well when testing the Bluetooth shield. Install a bletooth App such as Blueterm
+
+Testing the shield using the hardware serial port:
+
+1. Ensure the UART/DLine switch is in the UART position.
+
+2. Ensure both the small white switches are to the left, closest to pin 10 on the Bluetooth Bee board.
+
+3. Upload the Serial port sketch and switch on the Serial Port Monitor. Run Blueterm on your android. The green state led on the Bluetooth Bee board will be flashing green.
+
+4. Click on Connect Device, then Scan for new devices you should see Bluetooth Bee (mine also showed it as 20:13:06:25:06:92). Select this and if requested enter 1234 as the pairing code.
+
+5. The green led will switch off and the blue led will switch on showing the two units are paired.
+
+6. Instructions for turning pin 13 LED on the Arduino On and Off are shown on the Android device.
+
+7. Press key 1 on the Android keyboard and the Led will turn on. Press 0 (zero) and it will turn off. The LED status is shown on the Android device.
+
+Testing the shield using the software serial port:
+
+In the advertisment for this shieldit made it sound like the Bluetooth board was connected to Arduino pins 2 and 3, in fact they are not until the two small solder pads marked 2 are soldered together and those marked 3 are soldered together. To give me more flexibility and to be able to use this shield on a Mega 256, I soldered a two pin female header to the prototyping area. Using very fine copper wire I connected this header socket to the two small through plated holes just blow the  pads. Now, using jumper wire, I can connect to any pins I want to use for Software Serial.
+
+1. Switch off the Arduino, move the UART/DLine switch to DLINE. Connect up the pins you want to use for Software Serial (or use 2 (RX) and 3 (TX) if you simply shorted the solder pads. Upload the Software Serial sketch.
+
+Connect to your Android device using Blueterm, and messages can be sent from the Android to the Arduino through the Serial Monitot, and to the Arduino from the Android using Blueterm.
+
+Sending AT Commands:
+
+Switch off the Arduino, ensure the UART/DLine switch is in the DLine position and the top white switch on the Bluetooth Bee board is moved over to the RIGHT hand side. 
+
+1. Upload the AT Command sketch and the green State LED will flash slowly. Communication to the Bluetooth board is through the Software Serial at a speed 38400 and communication to the Arduino is through the Hardware Serial Port at a speed of 9600.
+
+2. in the Serial Monitor ensure that NL & CR is selected from the drop down menue at the bottom of the screen.
+
+3. Type in AT and click on the SEND button. OK will be printed in the Serial Monitor. Type in AT+UART? and click SEND. The current speed (9600,0,0) will be printed in the Serial Monitor.
+
+4. Adjust the AT commands as you wish. Switch off the Arduino and return the top small white switch to the left hand side.
+
+The board is now fully functional. The only problem I found was that I could not upload a sketch with the shield in place, even with the UART/DLine swith in the DLine position.
